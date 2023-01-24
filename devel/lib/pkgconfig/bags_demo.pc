@@ -1,0 +1,8 @@
+prefix=/home/lxm/bags_ws/devel
+
+Name: bags_demo
+Description: Description of bags_demo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
