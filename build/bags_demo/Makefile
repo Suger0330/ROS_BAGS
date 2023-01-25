@@ -68,6 +68,28 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -80,27 +102,16 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
 
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
+# Special rule for the target test
+test/fast: test
 
-.PHONY : list_install_components/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
+.PHONY : test/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -123,17 +134,6 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -168,109 +168,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-.PHONY : bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
+.PHONY : bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-rosgraph_msgs_generate_messages_py: bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+std_srvs_generate_messages_cpp: bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
 
-.PHONY : rosgraph_msgs_generate_messages_py
+.PHONY : std_srvs_generate_messages_cpp
 
 # fast build rule for target.
-rosgraph_msgs_generate_messages_py/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
-.PHONY : rosgraph_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-.PHONY : bags_demo/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_lisp: bags_demo/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-
-.PHONY : roscpp_generate_messages_lisp
-
-# fast build rule for target.
-roscpp_generate_messages_lisp/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make bags_demo/CMakeFiles/roscpp_generate_messages_lisp.dir/build
-.PHONY : roscpp_generate_messages_lisp/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
-.PHONY : bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-topic_tools_generate_messages_cpp: bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
-
-.PHONY : topic_tools_generate_messages_cpp
-
-# fast build rule for target.
-topic_tools_generate_messages_cpp/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/build.make bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/build
-.PHONY : topic_tools_generate_messages_cpp/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-.PHONY : bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_lisp: bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_lisp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_lisp/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-.PHONY : bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_eus: bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_eus
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
-.PHONY : rosgraph_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-.PHONY : bags_demo/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_nodejs: bags_demo/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-
-.PHONY : roscpp_generate_messages_nodejs
-
-# fast build rule for target.
-roscpp_generate_messages_nodejs/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make bags_demo/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
-.PHONY : roscpp_generate_messages_nodejs/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-.PHONY : bags_demo/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_eus: bags_demo/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-.PHONY : std_msgs_generate_messages_eus
-
-# fast build rule for target.
-std_msgs_generate_messages_eus/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make bags_demo/CMakeFiles/std_msgs_generate_messages_eus.dir/build
-.PHONY : std_msgs_generate_messages_eus/fast
+std_srvs_generate_messages_cpp/fast:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
+.PHONY : std_srvs_generate_messages_cpp/fast
 
 # Convenience name for target.
 bags_demo/CMakeFiles/bags_read_c.dir/rule:
@@ -288,141 +198,6 @@ bags_read_c/fast:
 .PHONY : bags_read_c/fast
 
 # Convenience name for target.
-bags_demo/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-.PHONY : bags_demo/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_lisp: bags_demo/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : std_msgs_generate_messages_lisp
-
-# fast build rule for target.
-std_msgs_generate_messages_lisp/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make bags_demo/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
-.PHONY : std_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-.PHONY : bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_nodejs: bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
-.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
-.PHONY : bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-topic_tools_generate_messages_lisp: bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
-
-.PHONY : topic_tools_generate_messages_lisp
-
-# fast build rule for target.
-topic_tools_generate_messages_lisp/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/build.make bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/build
-.PHONY : topic_tools_generate_messages_lisp/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/bags_write_c.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/bags_write_c.dir/rule
-.PHONY : bags_demo/CMakeFiles/bags_write_c.dir/rule
-
-# Convenience name for target.
-bags_write_c: bags_demo/CMakeFiles/bags_write_c.dir/rule
-
-.PHONY : bags_write_c
-
-# fast build rule for target.
-bags_write_c/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/bags_write_c.dir/build.make bags_demo/CMakeFiles/bags_write_c.dir/build
-.PHONY : bags_write_c/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-.PHONY : bags_demo/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_cpp: bags_demo/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-.PHONY : roscpp_generate_messages_cpp
-
-# fast build rule for target.
-roscpp_generate_messages_cpp/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make bags_demo/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-.PHONY : roscpp_generate_messages_cpp/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-.PHONY : bags_demo/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_cpp: bags_demo/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : std_msgs_generate_messages_cpp
-
-# fast build rule for target.
-std_msgs_generate_messages_cpp/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make bags_demo/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
-.PHONY : std_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
-.PHONY : bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-std_srvs_generate_messages_cpp: bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
-
-.PHONY : std_srvs_generate_messages_cpp
-
-# fast build rule for target.
-std_srvs_generate_messages_cpp/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make bags_demo/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
-.PHONY : std_srvs_generate_messages_cpp/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-.PHONY : bags_demo/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_nodejs: bags_demo/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : std_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-std_msgs_generate_messages_nodejs/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make bags_demo/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
-.PHONY : std_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-.PHONY : bags_demo/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_py: bags_demo/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-.PHONY : std_msgs_generate_messages_py
-
-# fast build rule for target.
-std_msgs_generate_messages_py/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/std_msgs_generate_messages_py.dir/build.make bags_demo/CMakeFiles/std_msgs_generate_messages_py.dir/build
-.PHONY : std_msgs_generate_messages_py/fast
-
-# Convenience name for target.
 bags_demo/CMakeFiles/std_srvs_generate_messages_eus.dir/rule:
 	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
 .PHONY : bags_demo/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
@@ -436,6 +211,21 @@ std_srvs_generate_messages_eus: bags_demo/CMakeFiles/std_srvs_generate_messages_
 std_srvs_generate_messages_eus/fast:
 	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/std_srvs_generate_messages_eus.dir/build.make bags_demo/CMakeFiles/std_srvs_generate_messages_eus.dir/build
 .PHONY : std_srvs_generate_messages_eus/fast
+
+# Convenience name for target.
+bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
+.PHONY : bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+topic_tools_generate_messages_nodejs: bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
+
+.PHONY : topic_tools_generate_messages_nodejs
+
+# fast build rule for target.
+topic_tools_generate_messages_nodejs/fast:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build.make bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build
+.PHONY : topic_tools_generate_messages_nodejs/fast
 
 # Convenience name for target.
 bags_demo/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule:
@@ -468,64 +258,34 @@ std_srvs_generate_messages_nodejs/fast:
 .PHONY : std_srvs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-bags_demo/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-.PHONY : bags_demo/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/rule:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/rule
+.PHONY : bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/rule
 
 # Convenience name for target.
-roscpp_generate_messages_eus: bags_demo/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+std_srvs_generate_messages_py: bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/rule
 
-.PHONY : roscpp_generate_messages_eus
+.PHONY : std_srvs_generate_messages_py
 
 # fast build rule for target.
-roscpp_generate_messages_eus/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/roscpp_generate_messages_eus.dir/build.make bags_demo/CMakeFiles/roscpp_generate_messages_eus.dir/build
-.PHONY : roscpp_generate_messages_eus/fast
+std_srvs_generate_messages_py/fast:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/build.make bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/build
+.PHONY : std_srvs_generate_messages_py/fast
 
 # Convenience name for target.
-bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
-.PHONY : bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
+bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
+.PHONY : bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-topic_tools_generate_messages_nodejs: bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
+topic_tools_generate_messages_cpp: bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
 
-.PHONY : topic_tools_generate_messages_nodejs
+.PHONY : topic_tools_generate_messages_cpp
 
 # fast build rule for target.
-topic_tools_generate_messages_nodejs/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build.make bags_demo/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build
-.PHONY : topic_tools_generate_messages_nodejs/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/roscpp_generate_messages_py.dir/rule
-.PHONY : bags_demo/CMakeFiles/roscpp_generate_messages_py.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_py: bags_demo/CMakeFiles/roscpp_generate_messages_py.dir/rule
-
-.PHONY : roscpp_generate_messages_py
-
-# fast build rule for target.
-roscpp_generate_messages_py/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/roscpp_generate_messages_py.dir/build.make bags_demo/CMakeFiles/roscpp_generate_messages_py.dir/build
-.PHONY : roscpp_generate_messages_py/fast
-
-# Convenience name for target.
-bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/rule
-.PHONY : bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/rule
-
-# Convenience name for target.
-topic_tools_generate_messages_py: bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/rule
-
-.PHONY : topic_tools_generate_messages_py
-
-# fast build rule for target.
-topic_tools_generate_messages_py/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/build.make bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/build
-.PHONY : topic_tools_generate_messages_py/fast
+topic_tools_generate_messages_cpp/fast:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/build.make bags_demo/CMakeFiles/topic_tools_generate_messages_cpp.dir/build
+.PHONY : topic_tools_generate_messages_cpp/fast
 
 # Convenience name for target.
 bags_demo/CMakeFiles/topic_tools_generate_messages_eus.dir/rule:
@@ -543,34 +303,49 @@ topic_tools_generate_messages_eus/fast:
 .PHONY : topic_tools_generate_messages_eus/fast
 
 # Convenience name for target.
-bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-.PHONY : bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+bags_demo/CMakeFiles/bags_write_c.dir/rule:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/bags_write_c.dir/rule
+.PHONY : bags_demo/CMakeFiles/bags_write_c.dir/rule
 
 # Convenience name for target.
-rosgraph_msgs_generate_messages_cpp: bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+bags_write_c: bags_demo/CMakeFiles/bags_write_c.dir/rule
 
-.PHONY : rosgraph_msgs_generate_messages_cpp
+.PHONY : bags_write_c
 
 # fast build rule for target.
-rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make bags_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+bags_write_c/fast:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/bags_write_c.dir/build.make bags_demo/CMakeFiles/bags_write_c.dir/build
+.PHONY : bags_write_c/fast
 
 # Convenience name for target.
-bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/rule:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/rule
-.PHONY : bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/rule
+bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
+.PHONY : bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
-std_srvs_generate_messages_py: bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/rule
+topic_tools_generate_messages_lisp: bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
 
-.PHONY : std_srvs_generate_messages_py
+.PHONY : topic_tools_generate_messages_lisp
 
 # fast build rule for target.
-std_srvs_generate_messages_py/fast:
-	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/build.make bags_demo/CMakeFiles/std_srvs_generate_messages_py.dir/build
-.PHONY : std_srvs_generate_messages_py/fast
+topic_tools_generate_messages_lisp/fast:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/build.make bags_demo/CMakeFiles/topic_tools_generate_messages_lisp.dir/build
+.PHONY : topic_tools_generate_messages_lisp/fast
+
+# Convenience name for target.
+bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/rule:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f CMakeFiles/Makefile2 bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/rule
+.PHONY : bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/rule
+
+# Convenience name for target.
+topic_tools_generate_messages_py: bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/rule
+
+.PHONY : topic_tools_generate_messages_py
+
+# fast build rule for target.
+topic_tools_generate_messages_py/fast:
+	cd /home/lxm/bags_ws/build && $(MAKE) -f bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/build.make bags_demo/CMakeFiles/topic_tools_generate_messages_py.dir/build
+.PHONY : topic_tools_generate_messages_py/fast
 
 src/bags_read_c.o: src/bags_read_c.cpp.o
 
@@ -633,39 +408,24 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... install"
-	@echo "... list_install_components"
-	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... roscpp_generate_messages_lisp"
-	@echo "... topic_tools_generate_messages_cpp"
-	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... install/local"
-	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... roscpp_generate_messages_nodejs"
-	@echo "... std_msgs_generate_messages_eus"
-	@echo "... bags_read_c"
-	@echo "... std_msgs_generate_messages_lisp"
-	@echo "... rosgraph_msgs_generate_messages_nodejs"
-	@echo "... topic_tools_generate_messages_lisp"
-	@echo "... bags_write_c"
-	@echo "... roscpp_generate_messages_cpp"
-	@echo "... std_msgs_generate_messages_cpp"
+	@echo "... list_install_components"
 	@echo "... std_srvs_generate_messages_cpp"
-	@echo "... std_msgs_generate_messages_nodejs"
-	@echo "... std_msgs_generate_messages_py"
+	@echo "... install"
+	@echo "... bags_read_c"
 	@echo "... std_srvs_generate_messages_eus"
+	@echo "... topic_tools_generate_messages_nodejs"
 	@echo "... std_srvs_generate_messages_lisp"
 	@echo "... std_srvs_generate_messages_nodejs"
-	@echo "... rebuild_cache"
-	@echo "... roscpp_generate_messages_eus"
-	@echo "... topic_tools_generate_messages_nodejs"
-	@echo "... roscpp_generate_messages_py"
-	@echo "... topic_tools_generate_messages_py"
-	@echo "... topic_tools_generate_messages_eus"
-	@echo "... edit_cache"
-	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... std_srvs_generate_messages_py"
+	@echo "... topic_tools_generate_messages_cpp"
+	@echo "... topic_tools_generate_messages_eus"
 	@echo "... test"
+	@echo "... bags_write_c"
+	@echo "... topic_tools_generate_messages_lisp"
+	@echo "... rebuild_cache"
+	@echo "... edit_cache"
+	@echo "... topic_tools_generate_messages_py"
 	@echo "... src/bags_read_c.o"
 	@echo "... src/bags_read_c.i"
 	@echo "... src/bags_read_c.s"

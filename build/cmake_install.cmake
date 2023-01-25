@@ -131,6 +131,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/lxm/bags_ws/build/gtest/cmake_install.cmake")
+  include("/home/lxm/bags_ws/build/rqt_demo/cmake_install.cmake")
   include("/home/lxm/bags_ws/build/bags_demo/cmake_install.cmake")
 
 endif()
